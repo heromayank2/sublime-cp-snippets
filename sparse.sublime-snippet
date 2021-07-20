@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[
+int table[100005][18];
+struct sparse{
+    void precomp(int a[]){
+        for(int i=0;i<n;i++) table[i][0] = a[i];
+        for(int i=1;i<=k;i++){
+            for(int j=0;j<=n-(1<<(i));j++){
+                table[j][i] = min(table[j][i-1],table[(1<<(i-1))+j][i-1]); 
+            }
+        }
+    }
+
+    int query(int x,int y){
+        int delta = y-x; x--;
+        int tmp = (int)(log(delta)/log(2));
+        return min(table[x][tmp],table[y-(1<<tmp)][tmp]);
+    }
+}st;
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sparse</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

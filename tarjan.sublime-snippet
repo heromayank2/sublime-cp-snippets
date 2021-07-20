@@ -1,0 +1,36 @@
+<snippet>
+	<content><![CDATA[
+bool visited[100005]; 
+int disc[100005],low[100005],parent[100005]; 
+
+vector<pair<int,int>> ans;
+vector<int> gr[100005];
+
+void DFS(int u){ 
+    static int time = 0; 
+    visited[u] = true; 
+    disc[u] = low[u] = ++time; 
+
+    for (auto it:gr[u]){ 
+        int v = it;
+
+        if (!visited[v]){ 
+            parent[v] = u; 
+            DFS(v); 
+            low[u] = min(low[u], low[v]); 
+            if (low[v] > disc[u]) ans.push_back({u,v});
+        } 
+
+        else if (v != parent[u]) low[u] = min(low[u], disc[v]); 
+    } 
+} 
+
+// memset(parent,-1,sizeof(parent));
+    
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tarjan</tabTrigger>
+	<tabTrigger>bridges</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

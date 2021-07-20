@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+vector<int> gr[N];
+int visited[N];
+int color[N];
+
+int isBipartiteDFS(int cur){
+    visited[cur] = 1;
+    for(auto& it: gr[cur]){
+        if(visited[it] && color[it]==color[cur]) return -1;
+        if(!visited[it]){
+            color[it] = 1-color[cur];
+            if(isBipartiteDFS(it)==-1){
+                return -1;
+            }
+        }
+    }
+    return 1;
+}
+// set color[x]=-1 in the main loop and set color[root]=0 before function call
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>bipartite</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

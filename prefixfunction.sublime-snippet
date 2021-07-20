@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+vector<int> prefix_fun(string s){
+    int n = s.length();
+    vector<int> pie(n,0);
+ 
+    for(int i=1;i<n;i++){
+        int k = pie[i-1];
+        while(k>0 && s[i]!=s[k]) k = pie[k-1];
+        if(s[i]==s[k]) k++;
+        pie[i] = k;
+    }
+ 
+    return pie;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>prefixfunction</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

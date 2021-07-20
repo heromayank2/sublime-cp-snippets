@@ -1,0 +1,44 @@
+<snippet>
+	<content><![CDATA[
+struct node{
+    bool is_end;
+    node *nxt[26];
+    node(){
+        is_end = false;
+        for(int j=0;j<26;j++){
+            nxt[j]=NULL;
+        }
+    }
+};
+
+node* root;
+
+void insert(string s){
+    node *cur = root;
+    for(int i=0;i<s.length();i++){
+        if(cur->nxt[s[i]-'a']==NULL){
+            cur->nxt[s[i]-'a'] = new node();
+        }
+        cur = cur->nxt[s[i]-'a'];
+    }
+    cur->is_end = true;
+}
+
+bool check(string s){
+    node *cur = root;
+    for(int i=0;i<s.length();i++){
+        if(cur->nxt[s[i]-'a']==NULL){
+            return false;
+        }
+        cur = cur->nxt[s[i]-'a'];
+    }
+    return cur->is_end;
+}
+
+// root = new node(); put this in main
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>trie</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

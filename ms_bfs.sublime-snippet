@@ -1,0 +1,38 @@
+<snippet>
+	<content><![CDATA[
+int n;
+int ans[N];
+vector<int> gr[N];
+
+// multisource bfs: used if their are multiple sources avaliable for any particular destination (st = sources && ed = destinations)
+void ms_bfs(vector<int> st, vector<int> ed){
+    vector<int> d(n,INT_MAX);
+    queue<int> q;
+
+    for(auto it: st){
+        d[it] = 0; 
+        q.push(it);
+    }
+
+    while(!q.empty()){
+        int x = q.front(); q.pop();
+        for(auto it:gr[x]){
+            if(d[it]==INT_MAX){
+                d[it] = d[x] + 1;
+                q.push(it);
+            }
+        }
+    }
+
+    for(auto it: ed){
+        if(d[it]!=INT_MAX){
+            ans[it] = d[it]; 
+        }
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>multisource_bfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

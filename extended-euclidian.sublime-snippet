@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+int x,y,GCD;
+void extendedEuclid(int a,int b){
+	// To calculate Ax + By = C where C is a mulitple of divior of A and B (K*gcd(A,B))
+	if(b==0){
+		x = 1; y = 0;GCD =a; 
+		return;
+	}
+	extendedEuclid(b,a%b);
+	int x1 = y;
+	int y1 = x - (a/b)*y;
+
+	x = x1;
+	y = y1;
+	// Multiply by K to get the final answer
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>extended euclidian</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

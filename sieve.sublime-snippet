@@ -1,0 +1,26 @@
+<snippet>
+	<content><![CDATA[
+
+int primes[N];
+void sieve(){
+	for(int i=3;i<N;i+=2){
+		primes[i]=1;
+	}
+	for(int i=3;i<N;i++){
+		if(primes[i]==1){
+			for(int j = i*i;j<N;j+=i){
+				primes[j]=0;
+			}
+		}
+	}
+	primes[2]=1;
+	primes[0]=primes[1]=0;
+}
+
+// primes[i] = 1 if i is prime otherwise 0 and dont forget to define N
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sieve</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

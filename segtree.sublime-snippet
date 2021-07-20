@@ -1,0 +1,58 @@
+<snippet>
+	<content><![CDATA[
+struct segtree {
+    vector<int> tr;
+    void init(int n) {
+        tr.resize(4 * n);
+    }
+    void build(int a[], int start, int end, int node) {
+        if (start == end) {
+            tr[node] = a[start];
+            return;
+        }
+        int mid = (start + end) / 2;
+
+        build(a, start, mid, 2 * node + 1);
+        build(a, mid + 1, end, 2 * node + 2);
+
+        tr[node] = tr[2 * node + 1] + tr[2 * node + 2];
+    }
+
+    int calc(int start, int end, int l, int r, int node) {
+        // no overlap
+        if (start > r || end < l) {
+            return 0;
+        }
+        // complete
+        if (start >= l && end <= r) {
+            return tr[node];
+        }
+        // partial
+        int mid = (start + end) / 2;
+        int q1 = calc(start, mid, l, r, 2 * node + 1);
+        int q2 = calc(mid + 1 , end, l, r, 2 * node + 2);
+        return q1 + q2;
+    }
+
+    void update(int start, int end, int index, int val, int node) {
+        if (start == end) {
+            tr[node] = val;
+            return ;
+        }
+        int mid = (start + end) / 2;
+
+        if (index <= mid) {
+            update(start, mid, index, val, 2 * node + 1);
+        }
+        else {
+            update(mid + 1, end, index, val, 2 * node + 2);
+        }
+        tr[node] = tr[2 * node + 1] + tr[2 * node + 2];
+    }
+} st;
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>segtree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

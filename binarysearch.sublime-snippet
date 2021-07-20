@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+int low = 0, high = n;
+while(high>low){
+	int mid = (low+high)/2;
+	if(check(mid)){
+		high = mid-1;
+	}else{
+		low = mid+1;
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>binarysearch</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

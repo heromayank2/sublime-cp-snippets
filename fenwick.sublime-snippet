@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+struct fenwick {
+    vector<int> fn;
+    int n;
+    void init(int _n) {
+        n = _n;
+        fn.resize(n+1, 0);
+    }
+    void add(int x, int val) {
+        x++; // 1 based indexing
+        while (x <= n) {
+            fn[x] += val;
+            x += (x & (-x));
+        }
+    }
+    int query(int x) {
+        // x++; // 1 based indexing
+        int ans = 0;
+        while (x) {
+            ans += fn[x];
+            x -= (x & (-x));
+        }
+        return ans;
+    }
+} bit;
+
+// bit.init(n);
+// for (i=0;i<n;i++) {
+//     bit.add(i, a[i]);
+// }
+// cout<<bit.query(3);
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fenwick</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
